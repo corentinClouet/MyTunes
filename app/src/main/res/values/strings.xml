@@ -2,6 +2,6 @@
     <string name="app_name">MyTunes</string>
 
     <string name="search_term_title">Recherche</string>
-    <string name="last_search">Dernières recherches</string>
     <string name="track_title">Titres</string>
+    <string name="query_hint">Search by artist name</string>
 </resources>

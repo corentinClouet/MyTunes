@@ -16,5 +16,5 @@ interface CollectionDao {
     fun loadById(collectionId: Long): Collection
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(collection: Collection)
+    suspend fun insert(collection: Collection)
 }
