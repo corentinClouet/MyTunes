@@ -16,5 +16,5 @@ interface TrackDao {
     fun loadById(trackId: Long): Track
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(track: Track)
+    suspend fun insert(track: Track)
 }

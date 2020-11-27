@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         trackViewModel.data.observe(this, Observer {
             // Populate the UI
-            textViewLastSearch.text = it.tracks?.get(0)?.artistName
+            textViewTracks.text = it.tracks?.get(0)?.artistName
         })
 
         trackViewModel.loadingState.observe(this, Observer {

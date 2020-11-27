@@ -3,17 +3,19 @@ package com.coreclouet.mytunes.repository
 import com.coreclouet.mytunes.dao.ArtistDao
 import com.coreclouet.mytunes.dao.CollectionDao
 import com.coreclouet.mytunes.dao.TrackDao
-import com.coreclouet.mytunes.model.Artist
+import com.coreclouet.mytunes.model.*
 import com.coreclouet.mytunes.model.Collection
-import com.coreclouet.mytunes.model.SearchResult
-import com.coreclouet.mytunes.model.Track
 import com.coreclouet.mytunes.remote.ItunesApi
 
 class SongRepository(private val api: ItunesApi, private val artistDao: ArtistDao, private val collectionDao: CollectionDao, private val trackDao: TrackDao) {
 
-    fun searchTracks(term: String) = api.searchTracks(term)
+    suspend fun searchTracks(term: String) = api.searchTracks(term)
 
-    fun saveSearchResult(searchResult: SearchResult?) {
+    suspend fun getArtistWithCollectionsAndTracks(artistId: Long): ArtistWithCollectionAndTracks {
+       return artistDao.getArtistWithCollectionsAndTracks(artistId)
+    }
+
+    suspend fun saveSearchResult(searchResult: SearchResult?) {
         if (searchResult?.tracks == null) return
 
         searchResult.tracks.forEach {

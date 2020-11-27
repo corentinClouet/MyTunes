@@ -14,8 +14,8 @@ interface ArtistDao {
 
     @Transaction
     @Query("SELECT * FROM artist WHERE id = :artistId")
-    fun getArtistWithCollectionsAndTracks(artistId: Long): List<ArtistWithCollectionAndTracks>
+    suspend fun getArtistWithCollectionsAndTracks(artistId: Long): ArtistWithCollectionAndTracks
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(artist: Artist)
+    suspend fun insert(artist: Artist)
 }
