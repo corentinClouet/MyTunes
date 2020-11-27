@@ -3,15 +3,14 @@ package com.coreclouet.mytunes.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.coreclouet.mytunes.data.model.LoadingState
-import com.coreclouet.mytunes.data.model.SearchResult
-import com.coreclouet.mytunes.data.model.Track
-import com.coreclouet.mytunes.repository.TrackRepository
+import com.coreclouet.mytunes.model.LoadingState
+import com.coreclouet.mytunes.model.SearchResult
+import com.coreclouet.mytunes.repository.SongRepository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TrackViewModel(private val repo: TrackRepository) : ViewModel(), Callback<SearchResult> {
+class SearchViewModel(private val repo: SongRepository) : ViewModel(), Callback<SearchResult> {
 
     private val _loadingState = MutableLiveData<LoadingState>()
     val loadingState: LiveData<LoadingState>
@@ -33,6 +32,7 @@ class TrackViewModel(private val repo: TrackRepository) : ViewModel(), Callback<
     override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
         if (response.isSuccessful) {
             _data.postValue(response.body())
+            repo.saveSearchResult(response.body())
             _loadingState.postValue(LoadingState.LOADED)
         } else {
             _loadingState.postValue(LoadingState.error(response.errorBody().toString()))

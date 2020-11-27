@@ -13,6 +13,7 @@ class App : Application() {
             androidLogger(Level.DEBUG)
             androidContext(this@App)
             modules(listOf(
+                databaseModule,
                 repositoryModule,
                 viewModelModule,
                 retrofitModule,

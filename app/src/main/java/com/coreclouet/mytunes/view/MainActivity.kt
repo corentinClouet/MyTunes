@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.coreclouet.mytunes.R
-import com.coreclouet.mytunes.viewmodel.TrackViewModel
+import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val trackViewModel by viewModel<TrackViewModel>()
+    private val trackViewModel by viewModel<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         trackViewModel.data.observe(this, Observer {
             // Populate the UI
-            textview_hello_world.text = it.tracks?.get(0)?.artistName
+            textViewLastSearch.text = it.tracks?.get(0)?.artistName
         })
 
         trackViewModel.loadingState.observe(this, Observer {

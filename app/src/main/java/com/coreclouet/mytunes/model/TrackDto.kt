@@ -1,4 +1,4 @@
-package com.coreclouet.mytunes.data.model
+package com.coreclouet.mytunes.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,110 +8,110 @@ data class SearchResult(
 	val resultCount: Int? = null,
 
 	@field:SerializedName("results")
-	val tracks: List<Track?>? = null
+	val tracks: List<Result?>? = null
 )
 
-data class Track(
+data class Result(
 
 	@field:SerializedName("artworkUrl100")
-	val artworkUrl100: String? = null,
+	val artworkUrl100: String,
 
 	@field:SerializedName("trackTimeMillis")
-	val trackTimeMillis: Int? = null,
+	val trackTimeMillis: Long,
 
 	@field:SerializedName("country")
-	val country: String? = null,
+	val country: String,
 
 	@field:SerializedName("previewUrl")
-	val previewUrl: String? = null,
+	val previewUrl: String,
 
 	@field:SerializedName("artistId")
-	val artistId: Int? = null,
+	val artistId: Long,
 
 	@field:SerializedName("trackName")
-	val trackName: String? = null,
+	val trackName: String,
 
 	@field:SerializedName("collectionName")
-	val collectionName: String? = null,
+	val collectionName: String,
 
 	@field:SerializedName("artistViewUrl")
-	val artistViewUrl: String? = null,
+	val artistViewUrl: String,
 
 	@field:SerializedName("discNumber")
-	val discNumber: Int? = null,
+	val discNumber: Int,
 
 	@field:SerializedName("trackCount")
-	val trackCount: Int? = null,
+	val trackCount: Int,
 
 	@field:SerializedName("artworkUrl30")
-	val artworkUrl30: String? = null,
+	val artworkUrl30: String,
 
 	@field:SerializedName("wrapperType")
-	val wrapperType: String? = null,
+	val wrapperType: String,
 
 	@field:SerializedName("currency")
-	val currency: String? = null,
+	val currency: String,
 
 	@field:SerializedName("collectionId")
-	val collectionId: Int? = null,
+	val collectionId: Long,
 
 	@field:SerializedName("isStreamable")
-	val isStreamable: Boolean? = null,
+	val isStreamable: Boolean,
 
 	@field:SerializedName("trackExplicitness")
-	val trackExplicitness: String? = null,
+	val trackExplicitness: String,
 
 	@field:SerializedName("collectionViewUrl")
-	val collectionViewUrl: String? = null,
+	val collectionViewUrl: String,
 
 	@field:SerializedName("contentAdvisoryRating")
-	val contentAdvisoryRating: String? = null,
+	val contentAdvisoryRating: String,
 
 	@field:SerializedName("trackNumber")
-	val trackNumber: Int? = null,
+	val trackNumber: Int,
 
 	@field:SerializedName("releaseDate")
-	val releaseDate: String? = null,
+	val releaseDate: String,
 
 	@field:SerializedName("kind")
-	val kind: String? = null,
+	val kind: String,
 
 	@field:SerializedName("trackId")
-	val trackId: Int? = null,
+	val trackId: Long,
 
 	@field:SerializedName("collectionPrice")
-	val collectionPrice: Double? = null,
+	val collectionPrice: Double,
 
 	@field:SerializedName("discCount")
-	val discCount: Int? = null,
+	val discCount: Int,
 
 	@field:SerializedName("primaryGenreName")
-	val primaryGenreName: String? = null,
+	val primaryGenreName: String,
 
 	@field:SerializedName("trackPrice")
-	val trackPrice: Double? = null,
+	val trackPrice: Double,
 
 	@field:SerializedName("collectionExplicitness")
-	val collectionExplicitness: String? = null,
+	val collectionExplicitness: String,
 
 	@field:SerializedName("trackViewUrl")
-	val trackViewUrl: String? = null,
+	val trackViewUrl: String,
 
 	@field:SerializedName("artworkUrl60")
-	val artworkUrl60: String? = null,
+	val artworkUrl60: String,
 
 	@field:SerializedName("trackCensoredName")
-	val trackCensoredName: String? = null,
+	val trackCensoredName: String,
 
 	@field:SerializedName("artistName")
-	val artistName: String? = null,
+	val artistName: String,
 
 	@field:SerializedName("collectionCensoredName")
-	val collectionCensoredName: String? = null,
+	val collectionCensoredName: String,
 
 	@field:SerializedName("collectionArtistName")
-	val collectionArtistName: String? = null,
+	val collectionArtistName: String,
 
 	@field:SerializedName("collectionArtistId")
-	val collectionArtistId: Int? = null
+	val collectionArtistId: Int
 )

@@ -1,7 +1,6 @@
-package com.coreclouet.mytunes.data.remote
+package com.coreclouet.mytunes.remote
 
-import com.coreclouet.mytunes.data.model.SearchResult
-import com.coreclouet.mytunes.data.model.Track
+import com.coreclouet.mytunes.model.SearchResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
