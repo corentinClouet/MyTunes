@@ -12,6 +12,9 @@ interface ArtistDao {
     @Query("SELECT * FROM artist WHERE id = :artistId")
     fun loadById(artistId: Long): Artist
 
+    @Query("SELECT * FROM artist WHERE search_term = :term")
+    suspend fun loadByTerm(term: String): List<ArtistWithCollectionAndTracks>?
+
     @Transaction
     @Query("SELECT * FROM artist WHERE id = :artistId")
     suspend fun getArtistWithCollectionsAndTracks(artistId: Long): ArtistWithCollectionAndTracks

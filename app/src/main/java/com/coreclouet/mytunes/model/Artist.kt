@@ -8,5 +8,6 @@ import androidx.room.PrimaryKey
 data class Artist(
     @PrimaryKey val id: Long,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "view_url") val viewUrl: String
+    @ColumnInfo(name = "view_url") val viewUrl: String,
+    @ColumnInfo(name = "search_term") val searchTerm: String
 )
