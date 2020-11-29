@@ -10,7 +10,7 @@ import com.coreclouet.mytunes.model.Track
 @Dao
 interface TrackDao {
     @Query("SELECT * FROM track")
-    fun getAll(): List<Track>
+    suspend fun getAll(): List<Track>
 
     @Query("SELECT * FROM track WHERE id = :trackId")
     fun loadById(trackId: Long): Track

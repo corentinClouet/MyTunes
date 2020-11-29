@@ -1,7 +1,6 @@
 package com.coreclouet.mytunes.remote
 
-import com.coreclouet.mytunes.model.SearchResult
-import retrofit2.Call
+import com.coreclouet.mytunes.model.dto.SearchResult
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

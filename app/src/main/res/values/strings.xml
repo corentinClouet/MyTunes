@@ -4,4 +4,6 @@
     <string name="search_term_title">Recherche</string>
     <string name="track_title">Titres</string>
     <string name="query_hint">Search by artist name</string>
+    <string name="artist_collection">%s - %s</string>
+
 </resources>
