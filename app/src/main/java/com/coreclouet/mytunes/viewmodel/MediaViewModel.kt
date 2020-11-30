@@ -23,7 +23,7 @@ import kotlin.collections.ArrayList
 class MediaViewModel(private val repo: SongRepository) : ViewModel() {
 
     private var mediaPlayer: MediaPlayer? = null
-    private var timer = Timer()
+    private var timer: Timer? = null
 
     private val _selectedTrackPosition = MutableLiveData<Int>()
     val selectedTrackPosition: LiveData<Int>
@@ -209,6 +209,8 @@ class MediaViewModel(private val repo: SongRepository) : ViewModel() {
             it.reset()
         }
         mediaPlayer = null
+        timer?.cancel()
+        timer = null
         _mediaState.value = MediaState.PAUSED
     }
 
@@ -223,7 +225,7 @@ class MediaViewModel(private val repo: SongRepository) : ViewModel() {
             }
         }
         timer = Timer()
-        timer.schedule(timerTask, 0, 1000L)
+        timer?.schedule(timerTask, 0, 100L)
     }
 
     /**
