@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.coreclouet.mytunes.view.adapter.TrackAdapter
 import com.coreclouet.mytunes.viewmodel.MediaViewModel
 import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_media.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,6 +39,10 @@ class MediaActivity : AppCompatActivity() {
         mediaViewModel.loadingState.observe(this, Observer {
             manageLoading(it)
         })
+
+        imageViewPlayPause.setOnClickListener {
+            Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show()
+        }
 
         imageViewSkipNext.setOnClickListener {
             mediaViewModel.skipNext()
@@ -71,8 +77,9 @@ class MediaActivity : AppCompatActivity() {
             .load(selectedTrack.artworkUrl)
             .placeholder(R.drawable.ic_music_note)
             .error(R.drawable.ic_music_note)
+            .transform(RoundedCornersTransformation(10, 0))
             .into(imageViewCollection)
-        imageViewPlayPause.setImageResource(R.drawable.ic_play_circle)
+        imageViewPlayPause.setImageResource(R.drawable.ic_play_arrow)
         textViewTrackTitle.text = selectedTrack.trackName
         textViewTrackArtistCollection.text = getString(
             R.string.artist_collection,

@@ -3,7 +3,7 @@
 
     <string name="search_term_title">Recherche</string>
     <string name="track_title">Titres</string>
-    <string name="query_hint">Search by artist name</string>
+    <string name="query_hint">Artiste, titre, podcast…</string>
     <string name="artist_collection">%s - %s</string>
     <string name="playlist_title">Playlist</string>
     <string name="default_start_time">0:00</string>

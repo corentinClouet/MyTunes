@@ -5,6 +5,7 @@
     android:id="@+id/constraint_track_row_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
     android:paddingBottom="8dp">
 
     <ImageView
@@ -56,5 +57,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewCollectionItem"
         app:srcCompat="@drawable/ic_play_arrow"
-        app:tint="@color/orange_dark" />
+        app:tint="@color/blue" />
 </androidx.constraintlayout.widget.ConstraintLayout>
