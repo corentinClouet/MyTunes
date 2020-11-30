@@ -12,7 +12,6 @@
         android:id="@+id/imageViewCollectionItem"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/corner_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -57,5 +56,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewCollectionItem"
         app:srcCompat="@drawable/ic_play_arrow"
-        app:tint="@color/blue" />
+        app:tint="@color/grey_accent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
