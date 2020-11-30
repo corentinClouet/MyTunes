@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coreclouet.mytunes.R
 import com.coreclouet.mytunes.util.LoadingState
+import com.coreclouet.mytunes.view.adapter.TrackAdapter
 import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
