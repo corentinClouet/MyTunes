@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_track_row_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?selectableItemBackground"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/imageViewCollectionItem"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewTrackTitleItem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewPlayItem"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCollectionItem"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Back in black" />
+
+    <TextView
+        android:id="@+id/textViewTrackArtistCollectionItem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewPlayItem"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCollectionItem"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTrackTitleItem"
+        tools:text="AC/DC - Album" />
+
+    <ImageView
+        android:id="@+id/imageViewPlayItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCollectionItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCollectionItem"
+        app:srcCompat="@drawable/ic_play_arrow"
+        app:tint="@color/grey_accent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

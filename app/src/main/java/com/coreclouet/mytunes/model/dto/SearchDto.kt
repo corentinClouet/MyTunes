@@ -1,4 +1,4 @@
-package com.coreclouet.mytunes.data.model
+package com.coreclouet.mytunes.model.dto
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,16 +8,16 @@ data class SearchResult(
 	val resultCount: Int? = null,
 
 	@field:SerializedName("results")
-	val tracks: List<Track?>? = null
+	val results: List<ResultItem?>? = null
 )
 
-data class Track(
+data class ResultItem(
 
 	@field:SerializedName("artworkUrl100")
 	val artworkUrl100: String? = null,
 
 	@field:SerializedName("trackTimeMillis")
-	val trackTimeMillis: Int? = null,
+	val trackTimeMillis: Long? = null,
 
 	@field:SerializedName("country")
 	val country: String? = null,
@@ -26,7 +26,7 @@ data class Track(
 	val previewUrl: String? = null,
 
 	@field:SerializedName("artistId")
-	val artistId: Int? = null,
+	val artistId: Long? = null,
 
 	@field:SerializedName("trackName")
 	val trackName: String? = null,
@@ -53,7 +53,7 @@ data class Track(
 	val currency: String? = null,
 
 	@field:SerializedName("collectionId")
-	val collectionId: Int? = null,
+	val collectionId: Long? = null,
 
 	@field:SerializedName("isStreamable")
 	val isStreamable: Boolean? = null,
@@ -77,7 +77,7 @@ data class Track(
 	val kind: String? = null,
 
 	@field:SerializedName("trackId")
-	val trackId: Int? = null,
+	val trackId: Long? = null,
 
 	@field:SerializedName("collectionPrice")
 	val collectionPrice: Double? = null,
