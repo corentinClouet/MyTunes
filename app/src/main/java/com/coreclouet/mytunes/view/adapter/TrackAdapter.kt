@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.coreclouet.mytunes.R
 import com.coreclouet.mytunes.model.dto.TrackDto
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
 class TrackAdapter(private val context: Context, private var dataSet: List<TrackDto>) :
     RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
@@ -22,7 +23,6 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
         val title: TextView = view.findViewById(R.id.textViewTrackTitleItem)
         val artistCollection: TextView = view.findViewById(R.id.textViewTrackArtistCollectionItem)
         val collectionImg: ImageView = view.findViewById(R.id.imageViewCollectionItem)
-        val playImg: ImageView = view.findViewById(R.id.imageViewPlayItem)
     }
 
     // Create new views (invoked by the layout manager)
@@ -48,7 +48,9 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
             .load(dataSet[position].artworkUrl)
             .placeholder(R.drawable.ic_music_note)
             .error(R.drawable.ic_music_note)
+            .transform(RoundedCornersTransformation(10,0))
             .into(viewHolder.collectionImg)
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
