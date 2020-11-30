@@ -22,15 +22,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewPlaylist"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <ProgressBar
-        android:id="@+id/progressBarTime"
+    <SeekBar
+        android:id="@+id/seekBarTime"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="14dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:progressTint="@color/grey"
+        android:progressTint="@color/grey_accent"
         app:layout_constraintBottom_toTopOf="@+id/imageViewPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -110,23 +110,23 @@
         android:id="@+id/textViewTimeStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/default_start_time"
         android:textColor="@color/grey_dark"
-        app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarTime"
+        app:layout_constraintStart_toStartOf="@+id/seekBarTime"
         tools:text="0:00" />
 
     <TextView
         android:id="@+id/textViewTimeEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:textAlignment="viewEnd"
         android:textColor="@color/grey_dark"
-        app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarTime"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="3:54" />
 

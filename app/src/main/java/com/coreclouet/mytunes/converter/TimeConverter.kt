@@ -8,7 +8,7 @@ class TimeConverter {
         /**
          * Convert milliseconds to mm:ss format
          */
-        fun convertTimeInMillisToMediaFormat(timeInMillis: Long): String {
+        fun convertTimeInMillisToMediaFormat(timeInMillis: Int): String {
             val fmt = SimpleDateFormat("mm:ss", Locale.FRANCE)
             return fmt.format(timeInMillis)
         }

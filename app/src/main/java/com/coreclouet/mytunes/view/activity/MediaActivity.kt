@@ -1,26 +1,20 @@
 package com.coreclouet.mytunes.view.activity
 
 import android.app.Dialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.coreclouet.mytunes.R
 import com.coreclouet.mytunes.application.EXTRA_ARTIST_ID
 import com.coreclouet.mytunes.application.EXTRA_TRACK_ID
 import com.coreclouet.mytunes.converter.TimeConverter
-import com.coreclouet.mytunes.model.dto.TrackDto
 import com.coreclouet.mytunes.util.LoadingState
-import com.coreclouet.mytunes.view.adapter.TrackAdapter
+import com.coreclouet.mytunes.util.MediaState
 import com.coreclouet.mytunes.viewmodel.MediaViewModel
-import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_media.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,26 +26,55 @@ class MediaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_media)
 
+        //manage current track
         mediaViewModel.selectedTrackPosition.observe(this, Observer { trackPosition ->
             updateTrackInfo(trackPosition)
         })
 
+        //manage loading state (loading, loaded or error)
         mediaViewModel.loadingState.observe(this, Observer {
             manageLoading(it)
         })
 
+        //manage media state (button play or pause)
+        mediaViewModel.mediaState.observe(this, Observer {
+            manageMediaState(it)
+        })
+
+        //manage time start
+        mediaViewModel.timeStart.observe(this, Observer {
+            textViewTimeStart.text = TimeConverter.convertTimeInMillisToMediaFormat(it)
+        })
+
+        //manage time end
+        mediaViewModel.timeEnd.observe(this, Observer {
+            if (seekBarTime.max == 0) {
+                seekBarTime.max = it
+            }
+            textViewTimeEnd.text = TimeConverter.convertTimeInMillisToMediaFormat(it)
+        })
+
+        //manage time end
+        mediaViewModel.seekBarprogress.observe(this, Observer {
+            seekBarTime.progress = it
+        })
+
+        //toggle media state
         imageViewPlayPause.setOnClickListener {
-            Toast.makeText(this, "Not implemented yet", Toast.LENGTH_SHORT).show()
+            mediaViewModel.toggleMediaState()
         }
 
+        //skip to next track
         imageViewSkipNext.setOnClickListener {
             mediaViewModel.skipNext()
         }
 
+        //skip to previous track
         imageViewSkipPrevious.setOnClickListener {
             mediaViewModel.skipPrevious()
         }
 
+        //finish activity
         imageViewArrowBack.setOnClickListener {
             finish()
         }
@@ -62,7 +85,6 @@ class MediaActivity : AppCompatActivity() {
             val trackId = intent.getLongExtra(EXTRA_TRACK_ID, -1)
             mediaViewModel.fetchData(artistId, trackId)
         }
-
     }
 
     /**
@@ -86,8 +108,9 @@ class MediaActivity : AppCompatActivity() {
             selectedTrack.artistName,
             selectedTrack.collectionName
         )
-        textViewTimeEnd.text =
-            TimeConverter.convertTimeInMillisToMediaFormat(selectedTrack.timeInMillis)
+        textViewTimeStart.text = "0:00"
+        textViewTimeEnd.text = "???"
+        seekBarTime.max = 0
     }
 
     /**
@@ -98,7 +121,7 @@ class MediaActivity : AppCompatActivity() {
             LoadingState.Status.LOADING -> {
                 progressBarPlaylist.visibility = View.VISIBLE
                 imageViewCollection.visibility = View.GONE
-                progressBarTime.visibility = View.GONE
+                seekBarTime.visibility = View.GONE
                 imageViewPlayPause.visibility = View.GONE
                 imageViewSkipPrevious.visibility = View.GONE
                 imageViewSkipNext.visibility = View.GONE
@@ -111,7 +134,7 @@ class MediaActivity : AppCompatActivity() {
             LoadingState.Status.SUCCESS -> {
                 progressBarPlaylist.visibility = View.GONE
                 imageViewCollection.visibility = View.VISIBLE
-                progressBarTime.visibility = View.VISIBLE
+                seekBarTime.visibility = View.VISIBLE
                 imageViewPlayPause.visibility = View.VISIBLE
                 imageViewSkipPrevious.visibility = View.VISIBLE
                 imageViewSkipNext.visibility = View.VISIBLE
@@ -124,7 +147,7 @@ class MediaActivity : AppCompatActivity() {
             LoadingState.Status.ERROR -> {
                 progressBarPlaylist.visibility = View.GONE
                 imageViewCollection.visibility = View.VISIBLE
-                progressBarTime.visibility = View.VISIBLE
+                seekBarTime.visibility = View.VISIBLE
                 imageViewPlayPause.visibility = View.VISIBLE
                 imageViewSkipPrevious.visibility = View.VISIBLE
                 imageViewSkipNext.visibility = View.VISIBLE
@@ -134,6 +157,17 @@ class MediaActivity : AppCompatActivity() {
                 textViewTimeEnd.visibility = View.VISIBLE
                 showErrorMessage(state.msg)
             }
+        }
+    }
+
+    /**
+     * Manage UI depending on media state (PLAYING or PAUSED)
+     */
+    private fun manageMediaState(mediaState: MediaState) {
+        if (mediaState == MediaState.PLAYING) {
+            imageViewPlayPause.setImageResource(R.drawable.ic_pause)
+        } else {
+            imageViewPlayPause.setImageResource(R.drawable.ic_play_arrow)
         }
     }
 
