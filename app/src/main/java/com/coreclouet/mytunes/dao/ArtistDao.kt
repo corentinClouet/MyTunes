@@ -10,7 +10,7 @@ interface ArtistDao {
     fun getAll(): List<Artist>
 
     @Query("SELECT * FROM artist WHERE id = :artistId")
-    fun loadById(artistId: Long): Artist
+    suspend fun loadById(artistId: Long): ArtistWithCollectionAndTracks
 
     @Query("SELECT * FROM artist WHERE search_term = :term")
     suspend fun loadByTerm(term: String): List<ArtistWithCollectionAndTracks>?

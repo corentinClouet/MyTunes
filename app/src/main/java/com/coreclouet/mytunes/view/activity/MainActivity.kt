@@ -1,7 +1,8 @@
-package com.coreclouet.mytunes.view
+package com.coreclouet.mytunes.view.activity
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,14 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coreclouet.mytunes.R
+import com.coreclouet.mytunes.application.EXTRA_ARTIST_ID
+import com.coreclouet.mytunes.application.EXTRA_TRACK_ID
 import com.coreclouet.mytunes.util.LoadingState
 import com.coreclouet.mytunes.view.adapter.TrackAdapter
 import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TrackAdapter.CallBack {
 
     private val trackViewModel by viewModel<SearchViewModel>()
     private var mAdapter: TrackAdapter? = null
@@ -47,7 +49,12 @@ class MainActivity : AppCompatActivity() {
             mAdapter?.let {
                 mAdapter?.updateData(trackDtoList)
             } ?: run {
-                mAdapter = TrackAdapter(this, trackDtoList)
+                mAdapter =
+                    TrackAdapter(
+                        this,
+                        trackDtoList,
+                        this
+                    )
                 recyclerViewTracks.adapter = mAdapter
             }
         })
@@ -87,5 +94,16 @@ class MainActivity : AppCompatActivity() {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    /**
+     * Trigger while clicking on a track
+     * Open Media activity with corresponding track
+     */
+    override fun onTrackClick(artistId: Long, trackId: Long) {
+        val intent = Intent(this, MediaActivity::class.java)
+        intent.putExtra(EXTRA_ARTIST_ID, artistId)
+        intent.putExtra(EXTRA_TRACK_ID, trackId)
+        startActivity(intent)
     }
 }
