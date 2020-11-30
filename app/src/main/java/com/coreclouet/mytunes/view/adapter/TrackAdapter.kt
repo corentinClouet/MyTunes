@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.coreclouet.mytunes.R
 import com.coreclouet.mytunes.model.dto.TrackDto
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 
-class TrackAdapter(private val context: Context, private var dataSet: List<TrackDto>) :
+class TrackAdapter(
+    private val context: Context,
+    private var dataSet: List<TrackDto>,
+    private val callback: CallBack
+) :
     RecyclerView.Adapter<TrackAdapter.ViewHolder>() {
 
     /**
@@ -20,6 +25,7 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val constraint: ConstraintLayout = view.findViewById(R.id.constraint_track_row_item)
         val title: TextView = view.findViewById(R.id.textViewTrackTitleItem)
         val artistCollection: TextView = view.findViewById(R.id.textViewTrackArtistCollectionItem)
         val collectionImg: ImageView = view.findViewById(R.id.imageViewCollectionItem)
@@ -28,9 +34,7 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.track_row_item, viewGroup, false)
-
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.track_row_item, viewGroup, false)
         return ViewHolder(view)
     }
 
@@ -50,7 +54,10 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
             .error(R.drawable.ic_music_note)
             .transform(RoundedCornersTransformation(10,0))
             .into(viewHolder.collectionImg)
-
+        viewHolder.constraint.setOnClickListener(null)
+        viewHolder.constraint.setOnClickListener {
+            callback.onTrackClick(dataSet[position].artistId, dataSet[position].trackId)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -59,6 +66,10 @@ class TrackAdapter(private val context: Context, private var dataSet: List<Track
     fun updateData(data: List<TrackDto>) {
         dataSet = data
         notifyDataSetChanged()
+    }
+
+    interface CallBack {
+        fun onTrackClick(artistId: Long, trackId: Long)
     }
 
 }

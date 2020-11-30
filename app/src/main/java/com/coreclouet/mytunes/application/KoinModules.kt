@@ -7,6 +7,7 @@ import com.coreclouet.mytunes.dao.CollectionDao
 import com.coreclouet.mytunes.dao.TrackDao
 import com.coreclouet.mytunes.remote.ItunesApi
 import com.coreclouet.mytunes.repository.SongRepository
+import com.coreclouet.mytunes.viewmodel.MediaViewModel
 import com.coreclouet.mytunes.viewmodel.SearchViewModel
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -21,6 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 val viewModelModule = module {
     viewModel {
         SearchViewModel(get())
+    }
+    viewModel {
+        MediaViewModel(get())
     }
 }
 

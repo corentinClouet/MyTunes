@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:background="@color/grey_light"
     tools:context=".view.activity.MediaActivity">
 
     <ImageView
         android:id="@+id/imageViewCollection"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/textViewTimeStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlaylist"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ProgressBar
@@ -26,6 +30,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:progressTint="@color/orange_light"
         app:layout_constraintBottom_toTopOf="@+id/textViewTrackTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,36 +39,44 @@
         android:id="@+id/imageViewPlayPause"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_play_circle" />
+        app:srcCompat="@drawable/ic_play_circle"
+        app:tint="@color/orange" />
 
     <ImageView
         android:id="@+id/imageViewSkipPrevious"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayPause"
         app:layout_constraintEnd_toStartOf="@+id/imageViewPlayPause"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewPlayPause"
-        app:srcCompat="@drawable/ic_skip_previous" />
+        app:srcCompat="@drawable/ic_skip_previous"
+        app:tint="@color/orange" />
 
     <ImageView
         android:id="@+id/imageViewSkipNext"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewPlayPause"
         app:layout_constraintTop_toTopOf="@+id/imageViewPlayPause"
-        app:srcCompat="@drawable/ic_skip_next" />
+        app:srcCompat="@drawable/ic_skip_next"
+        app:tint="@color/orange" />
 
     <TextView
         android:id="@+id/textViewTrackTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
+        android:maxLines="1"
+        android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textViewTrackArtistCollection"
@@ -73,9 +86,14 @@
 
     <TextView
         android:id="@+id/textViewTrackArtistCollection"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/imageViewPlayPause"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:text="@string/default_start_time"
         app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
         app:layout_constraintStart_toStartOf="@+id/progressBarTime"
         tools:text="0:00" />
@@ -99,4 +118,38 @@
         app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
         app:layout_constraintEnd_toEndOf="@+id/progressBarTime"
         tools:text="3:54" />
+
+    <ImageView
+        android:id="@+id/imageViewArrowBack"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPlaylist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewPlaylist"
+        app:srcCompat="@drawable/ic_arrow_back" />
+
+    <TextView
+        android:id="@+id/textViewPlaylist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/playlist_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewArrowBack"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Playlist" />
+
+    <ProgressBar
+        android:id="@+id/progressBarPlaylist"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

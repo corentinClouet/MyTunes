@@ -25,11 +25,12 @@ class SongRepository(
      * Search tracks corresponding to the term
      */
     suspend fun searchTracks(term: String): Resource<List<TrackDto>> {
-        val artistsWithCollectionAndTracks: List<ArtistWithCollectionAndTracks>? = artistDao.loadByTerm(term)
+        val artistsWithCollectionAndTracks: List<ArtistWithCollectionAndTracks>? =
+            artistDao.loadByTerm(term)
         //if data exist in databse, convert data and return result
         if (artistsWithCollectionAndTracks != null && artistsWithCollectionAndTracks.isNotEmpty()) {
             val trackDtoList: List<TrackDto> =
-                TrackConverter.convertArtistWithCollectionsAndTracksToTrackDto(
+                TrackConverter.convertListArtistWithCollectionsAndTracksToTrackDto(
                     artistsWithCollectionAndTracks
                 )
             return Resource(Resource.Status.SUCCESS, trackDtoList, null)
@@ -43,6 +44,24 @@ class SongRepository(
             Resource(Resource.Status.SUCCESS, trackDtoList, null)
         } else {
             Resource(Resource.Status.ERROR, ArrayList(), searchResult.message())
+        }
+    }
+
+    /**
+     * Search artist with collections and tracks depending on artist id
+     */
+    suspend fun searchArtistWithCollectionsAndTracks(artistId: Long): Resource<List<TrackDto>> {
+        val artistWithCollectionAndTracks: ArtistWithCollectionAndTracks? =
+            artistDao.loadById(artistId)
+        //if data exist in databse, convert data and return result
+        return if (artistWithCollectionAndTracks != null) {
+            val trackDtoList: List<TrackDto> =
+                TrackConverter.convertArtistWithCollectionsAndTracksToTrackDto(
+                    artistWithCollectionAndTracks
+                )
+            Resource(Resource.Status.SUCCESS, trackDtoList, null)
+        } else {
+            Resource(Resource.Status.ERROR, ArrayList(), "No data available for this id.")
         }
     }
 
